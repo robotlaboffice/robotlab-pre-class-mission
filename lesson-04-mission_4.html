@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pre-class · Lesson 04 · Breathe Slowly · Robotlab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:   #f5f0eb;
+    --cream2:  #ede8e2;
+    --border:  #ddd8d0;
+    --text:    #1a1208;
+    --muted:   #9a9088;
+    --pink:    #e8186d;
+    --coral:   #e8643c;
+    --dark:    #1a1208;
+    --white:   #ffffff;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans:  'DM Sans', -apple-system, sans-serif;
+    --mono:  'SF Mono', 'Fira Mono', 'Consolas', monospace;
+    --r: 8px;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ── NAV ── */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+  }
+
+  /* Logo */
+  .logo {
+    display: flex; align-items: center; gap: 0;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 44px; height: 44px;
+    position: relative; flex-shrink: 0;
+  }
+  /* SVG blob logo approximation */
+  .logo-icon svg { width: 44px; height: 44px; }
+  .logo-wordmark {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--coral);
+    line-height: 1;
+    margin-left: 2px;
+  }
+  .logo-wordmark span { color: var(--coral); }
+  .logo-sub {
+    font-size: 9px;
+    color: var(--coral);
+    font-style: italic;
+    font-family: var(--sans);
+    margin-left: 46px;
+    margin-top: -2px;
+    display: block;
+    letter-spacing: 0.2px;
+  }
+
+  .logo-wrap { display: flex; flex-direction: column; }
+
+  /* Nav right pills */
+  .nav-pills { display: flex; gap: 8px; align-items: center; }
+  .nav-pill {
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text);
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .nav-pill:hover { background: var(--cream2); }
+  .nav-pill.active {
+    background: var(--dark);
+    color: var(--white);
+    border-color: var(--dark);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .nav-pill.active::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--pink);
+    flex-shrink: 0;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 40px 52px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 40px;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 18px;
+  }
+  .hero-eyebrow-line {
+    width: 32px; height: 2px;
+    background: var(--coral);
+    border-radius: 2px;
+  }
+  .hero-eyebrow-text {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(44px, 5.5vw, 64px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: var(--dark);
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--pink);
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    color: #4a4035;
+    line-height: 1.75;
+    max-width: 480px;
+    margin-bottom: 24px;
+  }
+
+  .hero-meta {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 4px; }
+  .hero-meta strong {
+    color: var(--text);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 11px;
+  }
+  .hero-meta .label {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 11px;
+  }
+
+  /* Hero illustration */
+  .hero-illustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Robot SVG */
+  .robot-wrap {
+    width: 320px;
+    position: relative;
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 48px 0 0;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 48px;
+  }
+  .section:last-of-type { border-bottom: none; }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: start;
+    gap: 0;
+    margin-bottom: 32px;
+    padding-bottom: 18px;
+    border-bottom: 1.5px solid var(--dark);
+  }
+
+  .section-num {
+    font-family: var(--serif);
+    font-size: 52px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--coral);
+    line-height: 1;
+    margin-top: -4px;
+  }
+
+  .section-title-wrap { padding-top: 4px; }
+  .section-label-sm {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .section h2 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--dark);
+    letter-spacing: -0.3px;
+    line-height: 1.25;
+  }
+  .section-time {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    padding-top: 6px;
+    white-space: nowrap;
+  }
+
+  /* ── GLOSS LIST ── */
+  .gloss-list { display: flex; flex-direction: column; gap: 0; }
+  .gloss-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .gloss-item:last-child { border-bottom: none; }
+  .gloss-key {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex; align-items: flex-start; gap: 6px;
+    padding-top: 2px;
+  }
+  .gloss-key .sl { color: var(--coral); }
+  .gloss-val { color: #4a4035; line-height: 1.65; }
+  .gloss-val strong { color: var(--dark); font-weight: 600; }
+
+  .callout {
+    border-left: 3px solid var(--pink);
+    padding: 10px 14px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: #5a5040;
+    line-height: 1.6;
+    background: rgba(232,24,109,0.04);
+    border-radius: 0 var(--r) var(--r) 0;
+    font-style: italic;
+  }
+
+  /* ── PREVIEW GRID ── */
+  .preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  @media(max-width:600px){ .preview-grid { grid-template-columns: 1fr; } }
+
+  .preview-card {
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+    background: var(--white);
+  }
+  .preview-vis {
+    height: 90px;
+    background: #1a1208;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+  }
+  .preview-leds { display: flex; gap: 10px; align-items: center; }
+  .preview-vis-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    font-weight: 600;
+  }
+  .preview-body { padding: 14px 16px; }
+  .card-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .preview-body h3 {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 5px;
+  }
+  .preview-body p { font-size: 12.5px; color: #6a6050; line-height: 1.6; }
+
+  /* LEDs */
+  .led {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #333; border: 1.5px solid #444;
+    flex-shrink: 0;
+  }
+  .led.breathe {
+    background: #4488ff; border-color: #2255cc;
+    animation: breathe 2.5s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%,100%{ opacity:.08; box-shadow:none; }
+    50%{ opacity:1; box-shadow:0 0 16px #4488ffbb; }
+  }
+  .led.c0 { background:#ff3333; border-color:#bb0000; box-shadow:0 0 8px #ff333388; }
+  .led.c1 { background:#ff7700; border-color:#cc5500; box-shadow:0 0 7px #ff770077; }
+  .led.c2 { background:#ffcc00; border-color:#aa8800; box-shadow:0 0 7px #ffcc0077; }
+  .led.c3 { background:#88cc00; border-color:#558800; box-shadow:0 0 7px #88cc0077; }
+  .led.c4 { background:#33dd33; border-color:#119911; box-shadow:0 0 9px #33dd3388; }
+
+  /* ── TASK LIST ── */
+  .task-list { display: flex; flex-direction: column; }
+  .task-item:hover .task-num { border-color:var(--coral); color:var(--coral); }
+  .task-item:hover { background:rgba(232,100,60,0.03); border-radius:6px; }
+  .task-item {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 0 16px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .task-item:last-child { border-bottom: none; }
+
+  .task-num {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    color: var(--muted);
+    flex-shrink: 0; margin-top: 3px;
+    background: var(--white);
+    transition: background .15s, border-color .15s, color .15s, transform .1s;
+    user-select: none;
+  }
+  .task-item:hover .task-num {
+    border-color: var(--coral);
+    color: var(--coral);
+    transform: scale(1.08);
+  }
+  .task-item.is-done .task-num {
+    background: var(--coral);
+    border-color: var(--coral);
+    color: white;
+    font-size: 16px;
+  }
+  .task-item.is-done .task-num::after { content: '✓'; }
+  .task-item:not(.is-done) .task-num-inner { display:block; }
+  .task-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+    line-height: 1.3;
+    transition: color .2s;
+  }
+  .task-item.is-done .task-title {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
+  .task-body { font-size: 13.5px; color: #5a5040; line-height: 1.7; }
+  .task-body p { margin-bottom: 8px; }
+  .task-body p:last-child { margin-bottom: 0; }
+
+  /* RGB chips */
+  .rgb-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+  .rc {
+    padding: 4px 11px; border-radius: 5px;
+    font-weight: 600; font-size: 11px; color: white;
+    font-family: var(--mono); white-space: nowrap;
+  }
+  .rc.r { background: #c62828; }
+  .rc.g { background: #2e7d32; }
+  .rc.b { background: #1565c0; }
+  .rc.y { background: #e65100; }
+  .rc.c { background: #00695c; }
+  .rc.m { background: #6a1b9a; }
+  .rc.w { background: #37474f; }
+
+  /* Loop diagram */
+  .loop-diagram {
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+    margin-top: 12px;
+    background: var(--white);
+  }
+  .loop-row {
+    display: flex; align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+  .loop-row:last-child { border-bottom: none; }
+  .loop-indent { width: 24px; background: var(--cream); border-right: 1px solid var(--border); flex-shrink: 0; }
+  .loop-code { font-family: var(--mono); font-size: 12px; padding: 8px 12px; color: var(--text); flex: 1; }
+  .loop-cmt { font-size: 11px; color: var(--muted); padding: 8px 12px 8px 0; font-style: italic; white-space: nowrap; }
+  .kw { color: var(--pink); font-weight: 700; }
+  .vl { color: #1565c0; font-weight: 600; }
+
+  .chip {
+    font-family: var(--mono); font-size: 11px;
+    background: var(--cream2); border: 1px solid var(--border);
+    border-radius: 4px; padding: 2px 7px; color: var(--text);
+    white-space: nowrap; display: inline-block;
+  }
+
+  .tip {
+    margin-top: 10px; font-size: 12.5px; color: var(--muted);
+    display: flex; gap: 6px; align-items: flex-start;
+    font-style: italic;
+  }
+  .tip::before { content: '💡'; flex-shrink: 0; font-style: normal; }
+
+  /* gloss nested */
+  .gloss-sm { display: flex; flex-direction: column; gap: 0; margin-top: 10px; }
+  .gloss-sm-item {
+    display: grid; grid-template-columns: 130px 1fr; gap: 0 16px;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .gloss-sm-item:last-child { border-bottom: none; }
+  .gloss-sm-key { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--muted); display: flex; gap: 5px; }
+  .gloss-sm-key .sl { color: var(--coral); }
+  .gloss-sm-val { color: #5a5040; line-height: 1.55; font-size: 12.5px; }
+
+  /* three questions */
+  .q-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .q-item { display: grid; grid-template-columns: 20px 1fr; gap: 0 10px; font-size: 13px; }
+  .q-num { font-size: 12px; color: var(--muted); padding-top: 1px; }
+  .q-text { color: #4a4035; line-height: 1.6; }
+
+  /* PROGRESS */
+  .progress-section {
+    background: var(--cream2);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 22px 26px;
+    margin-top: 32px;
+  }
+  .progress-label {
+    font-size: 13px; font-weight: 600; color: var(--text);
+    margin-bottom: 10px; display: flex; justify-content: space-between;
+  }
+  .progress-bar-wrap {
+    background: var(--border); border-radius: 99px;
+    height: 5px; overflow: hidden; margin-bottom: 12px;
+  }
+  .progress-bar-fill {
+    height: 100%; background: var(--coral);
+    border-radius: 99px; width: 0%; transition: width .4s ease;
+  }
+  .progress-msg { font-size: 13px; color: var(--muted); }
+
+  /* CTA */
+  .cta-section {
+    margin-top: 40px; padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    background: var(--white);
+  }
+  .cta-section p { font-size: 14px; color: #5a5040; margin-bottom: 16px; line-height: 1.65; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--dark); color: white;
+    font-size: 14px; font-weight: 600;
+    padding: 12px 22px; border-radius: var(--r);
+    transition: opacity .15s;
+  }
+  .cta-btn:hover { opacity: .85; }
+
+  /* FOOTER CALLOUT */
+  .footer-callout {
+    margin-top: 40px; padding: 28px;
+    border-radius: var(--r);
+    background: var(--dark); color: var(--white);
+  }
+  .footer-callout .fc-icon { font-size: 18px; margin-bottom: 8px; }
+  .footer-callout p {
+    font-family: var(--serif);
+    font-size: 20px; font-weight: 700; font-style: italic;
+    color: rgba(255,255,255,.9); line-height: 1.5; margin-bottom: 10px;
+  }
+  .footer-callout .fc-sub { font-size: 12px; color: rgba(255,255,255,.35); }
+
+  .site-footer {
+    text-align: center; padding: 20px 40px;
+    font-size: 11px; color: var(--muted); letter-spacing: .3px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media(max-width:780px){
+    .nav { padding: 0 20px; }
+    .hero { grid-template-columns: 1fr; padding: 36px 20px 32px; }
+    .hero-illustration { display: none; }
+    .content { padding: 0 20px 60px; }
+    .section-header { grid-template-columns: 70px 1fr auto; }
+    .gloss-item { grid-template-columns: 130px 1fr; }
+  }
+  @media(max-width:520px){
+    .section-header { grid-template-columns: 60px 1fr; }
+    .section-time { display: none; }
+    .gloss-item { grid-template-columns: 1fr; gap: 3px; }
+    .gloss-sm-item { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="logo-wrap">
+    <a class="logo" href="#">
+      <!-- Robotlab logo approximation using SVG -->
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="22" cy="22" rx="20" ry="20" fill="#f9e0eb"/>
+        <ellipse cx="16" cy="18" rx="13" ry="14" fill="#e8186d" opacity="0.7"/>
+        <ellipse cx="26" cy="14" rx="12" ry="11" fill="#e8643c" opacity="0.55"/>
+        <ellipse cx="28" cy="26" rx="10" ry="12" fill="#c47dd4" opacity="0.5"/>
+        <ellipse cx="18" cy="28" rx="9" ry="10" fill="#e8186d" opacity="0.4"/>
+        <rect x="13" y="10" width="18" height="24" rx="4" fill="white"/>
+        <text x="15" y="27" font-family="sans-serif" font-weight="900" font-size="16" fill="#e8186d">R</text>
+      </svg>
+      <div>
+        <div class="logo-wordmark">obotlab</div>
+        <div class="logo-sub">infinite possibilities</div>
+      </div>
+    </a>
+  </div>
+  <div class="nav-pills">
+    <a class="nav-pill" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-01-mission_1.html">LESSON 01</a>
+    <a class="nav-pill" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-02-mission_2.html">LESSON 02</a>
+    <a class="nav-pill" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-03-mission_3.html">LESSON 03</a>
+    <span class="nav-pill active">MISSION 04 · ACTIVE</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <div class="hero-eyebrow-text">Pre-class · Lesson 04</div>
+    </div>
+    <h1>Now let's make<br>the light <em>breathe<br>slowly.</em></h1>
+    <p class="hero-desc">Last class you made the mBot2 glow with running lights and flowing lights. Next class you'll take full control of colour — mixing RGB values, building breathing lamps, and smoothly shifting from one colour to another. Quick prep below so we hit the ground running.</p>
+    <div class="hero-meta">
+      <span><span class="label">Time:</span>&nbsp;<strong>~15 min</strong></span>
+      <span><span class="label">What you need:</span>&nbsp;<strong>Laptop + mBlock</strong></span>
+      <span><strong>No robot needed</strong></span>
+    </div>
+  </div>
+
+  <div class="hero-illustration">
+    <!-- Breathing lamp illustration -->
+    <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- body -->
+      <rect x="60" y="80" width="180" height="140" rx="18" fill="#222"/>
+      <!-- screen -->
+      <rect x="80" y="100" width="140" height="80" rx="8" fill="#111"/>
+      <!-- screen text -->
+      <text x="150" y="148" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#e8186d" letter-spacing="2">BREATHE</text>
+      <!-- arms -->
+      <rect x="20" y="110" width="40" height="28" rx="8" fill="#2a2a2a"/>
+      <rect x="240" y="110" width="40" height="28" rx="8" fill="#2a2a2a"/>
+      <!-- antenna -->
+      <line x1="150" y1="80" x2="150" y2="50" stroke="#444" stroke-width="3"/>
+      <circle cx="150" cy="44" r="8" fill="#e8643c"/>
+      <!-- LED row -->
+      <circle cx="96"  cy="210" r="13" fill="#f5c518"/>
+      <circle cx="128" cy="210" r="13" fill="#b85c38"/>
+      <circle cx="160" cy="210" r="13" fill="#c8427a"/>
+      <circle cx="192" cy="210" r="13" fill="#8c4ba8"/>
+      <circle cx="224" cy="210" r="13" fill="#3a8fc8"/>
+      <!-- shadow ellipse -->
+      <ellipse cx="150" cy="265" rx="80" ry="14" fill="#d4cfc9" opacity="0.6"/>
+      <!-- legs -->
+      <rect x="105" y="220" width="28" height="32" rx="6" fill="#1e1e1e"/>
+      <rect x="167" y="220" width="28" height="32" rx="6" fill="#1e1e1e"/>
+    </svg>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- 01 -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title-wrap">
+        <div class="section-label-sm">Quick Recap · Last lesson</div>
+        <h2>Do you still remember these?</h2>
+      </div>
+      <div class="section-time">3 min</div>
+    </div>
+
+    <div class="gloss-list">
+      <div class="gloss-item">
+        <div class="gloss-key"><span class="sl">/</span> LED all displays</div>
+        <div class="gloss-val"><strong>All 5 LEDs at once.</strong> One block sets every onboard LED to the same colour. Used this for running lights and flow lights last class.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-key"><span class="sl">/</span> LED 1–5 ▾</div>
+        <div class="gloss-val"><strong>One LED at a time.</strong> Each LED can be targeted independently — that's how you built the chase and fill patterns.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-key"><span class="sl">/</span> R, G, B values</div>
+        <div class="gloss-val"><strong>Three numbers, 0 to 255 each.</strong> Red, Green, Blue — mix different amounts to make any colour. All zeros = lights off. All 255s = white.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-key"><span class="sl">/</span> This lesson</div>
+        <div class="gloss-val">
+          Last class lights were on or off. Next class you'll make them <em>change</em> — gradually, smoothly, on a loop. A light that inhales and exhales. And one that drifts from red all the way through to green.
+          <div class="callout">— Lesson 04 · Breathe Slowly</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title-wrap">
+        <div class="section-label-sm">Preview · What you'll build</div>
+        <h2>Two kinds of light effects</h2>
+      </div>
+      <div class="section-time">2 min</div>
+    </div>
+
+    <p style="font-size:14px;color:#5a5040;margin-bottom:18px;line-height:1.7;">Next class you'll use a <strong>brightness variable</strong> and the RGB colour model to build these effects. Watch them animate below — same LED strip, completely different behaviour.</p>
+
+    <div class="preview-grid">
+      <div class="preview-card">
+        <div class="preview-vis">
+          <div class="preview-leds">
+            <div class="led breathe" style="animation-delay:0s"></div>
+            <div class="led breathe" style="animation-delay:0s"></div>
+            <div class="led breathe" style="animation-delay:0s"></div>
+            <div class="led breathe" style="animation-delay:0s"></div>
+            <div class="led breathe" style="animation-delay:0s"></div>
+          </div>
+          <div class="preview-vis-label">all in sync</div>
+        </div>
+        <div class="preview-body">
+          <div class="card-tag">Breathing Lamp · FADE</div>
+          <h3>Dim → Bright → Dim</h3>
+          <p>All LEDs slowly brighten then fade, on repeat — like a sleeping MacBook. One variable controls the whole thing.</p>
+        </div>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-vis">
+          <div class="preview-leds">
+            <div class="led c0"></div>
+            <div class="led c1"></div>
+            <div class="led c2"></div>
+            <div class="led c3"></div>
+            <div class="led c4"></div>
+          </div>
+          <div class="preview-vis-label">red → yellow → green</div>
+        </div>
+        <div class="preview-body">
+          <div class="card-tag">Colour Gradient · SHIFT</div>
+          <h3>Red → Yellow → Green</h3>
+          <p>R drops as G rises — the colour smoothly shifts across the spectrum. Like a traffic light in slow motion.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:18px;">→ Don't worry about how to code these yet. Just notice what's changing — brightness? colour? both? It'll click in class.</div>
+  </section>
+
+  <!-- 03 -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title-wrap">
+        <div class="section-label-sm">Before class · Tick when done</div>
+        <h2>Four quick warm-ups</h2>
+      </div>
+      <div class="section-time">10 min</div>
+    </div>
+
+    <p style="font-size:13.5px;color:#6a6050;margin-bottom:16px;line-height:1.7;">No robot needed — these are quick brain warm-ups so we can move fast in class. <strong style="color:var(--coral);">Tap a task to tick it off</strong> — it saves automatically.</p>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:24px;padding:10px 14px;background:rgba(232,100,60,0.07);border:1px solid rgba(232,100,60,0.2);border-radius:6px;font-size:12.5px;color:#7a5a3a;">
+      <span style="font-size:16px;">👆</span>
+      <span>Click anywhere on a task row to mark it done. Click again to undo.</span>
+    </div>
+
+    <div class="task-list">
+
+      <div class="task-item" id="t1" onclick="toggle('t1')" title="Click to tick off">
+        <div class="task-num" id="n1">1</div>
+        <div>
+          <div class="task-title" id="ttl1">Learn the RGB colour combinations</div>
+          <div class="task-body">
+            <p>Every colour the mBot2 displays is built from three values: <strong>R</strong>ed, <strong>G</strong>reen, <strong>B</strong>lue — each from 0 (off) to 255 (full brightness). Mix them to make anything.</p>
+            <p>No app needed. Just memorise these before class:</p>
+            <div class="rgb-row">
+              <span class="rc r">R 255  G 0  B 0 → Red</span>
+              <span class="rc g">R 0  G 255  B 0 → Green</span>
+              <span class="rc b">R 0  G 0  B 255 → Blue</span>
+            </div>
+            <div class="rgb-row">
+              <span class="rc y">R 255  G 255  B 0 → Yellow</span>
+              <span class="rc c">R 0  G 255  B 255 → Cyan</span>
+              <span class="rc m">R 255  G 0  B 255 → Magenta</span>
+              <span class="rc w">R 255  G 255  B 255 → White</span>
+            </div>
+            <p>Quick test before class — without looking: what makes yellow? What makes white?</p>
+            <div class="tip">All values at 0 = black (lights off). The higher the number, the brighter that channel.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-item" id="t2" onclick="toggle('t2')" title="Click to tick off">
+        <div class="task-num" id="n2">2</div>
+        <div>
+          <div class="task-title" id="ttl2">Spot a breathing light in real life</div>
+          <div class="task-body">
+            <p>A <strong>breathing lamp</strong> gradually brightens and dims on repeat — like inhaling and exhaling. It's everywhere once you notice it.</p>
+            <p>Find one example. Some easy ones to get you started:</p>
+            <div class="gloss-sm">
+              <div class="gloss-sm-item">
+                <div class="gloss-sm-key"><span class="sl">/</span> MacBook sleep</div>
+                <div class="gloss-sm-val">The white light slowly pulses when sleeping. The original breathing lamp.</div>
+              </div>
+              <div class="gloss-sm-item">
+                <div class="gloss-sm-key"><span class="sl">/</span> Phone notification</div>
+                <div class="gloss-sm-val">Some Android phones pulse a colour when you have unread messages.</div>
+              </div>
+              <div class="gloss-sm-item">
+                <div class="gloss-sm-key"><span class="sl">/</span> Gaming gear</div>
+                <div class="gloss-sm-val">RGB keyboards and mice often breathe slowly by default.</div>
+              </div>
+            </div>
+            <div class="tip">You'll share your example in the check-in form at the end. Bonus points for something unexpected.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-item" id="t3" onclick="toggle('t3')" title="Click to tick off">
+        <div class="task-num" id="n3">3</div>
+        <div>
+          <div class="task-title" id="ttl3">Read this loop — predict what it does</div>
+          <div class="task-body">
+            <p>In class we'll use a <strong>variable</strong> and a <strong>repeat until</strong> loop to fade the LED smoothly. Here's a simplified version — read it and think through what happens:</p>
+
+            <div class="loop-diagram">
+              <div class="loop-row">
+                <div class="loop-code"><span class="kw">set</span> brightness <span class="kw">to</span> <span class="vl">0</span></div>
+                <div class="loop-cmt">start dark</div>
+              </div>
+              <div class="loop-row">
+                <div class="loop-code"><span class="kw">repeat until</span> brightness <span class="kw">&gt;</span> <span class="vl">255</span></div>
+                <div class="loop-cmt">keep going…</div>
+              </div>
+              <div class="loop-row">
+                <div class="loop-indent"></div>
+                <div class="loop-code">LED all displays R <span class="vl">brightness</span> G <span class="vl">0</span> B <span class="vl">0</span></div>
+              </div>
+              <div class="loop-row">
+                <div class="loop-indent"></div>
+                <div class="loop-code"><span class="kw">wait</span> <span class="vl">0.02</span> seconds</div>
+              </div>
+              <div class="loop-row">
+                <div class="loop-indent"></div>
+                <div class="loop-code"><span class="kw">change</span> brightness <span class="kw">by</span> <span class="vl">5</span></div>
+                <div class="loop-cmt">get brighter</div>
+              </div>
+            </div>
+
+            <p style="margin-top:12px;">Think through these before class — no need to write anything:</p>
+            <div class="q-list">
+              <div class="q-item"><div class="q-num">①</div><div class="q-text">What colour does the LED start as? What does it look like at the end of the loop?</div></div>
+              <div class="q-item"><div class="q-num">②</div><div class="q-text">Why <span class="chip">brightness &gt; 255</span> instead of <span class="chip">brightness = 255</span>? What breaks if you use equals?</div></div>
+              <div class="q-item"><div class="q-num">③</div><div class="q-text">If you changed <span class="chip">by 5</span> to <span class="chip">by 1</span> — smoother or rougher? Why?</div></div>
+            </div>
+            <div class="tip">Variables are labelled boxes. "brightness" holds a number that changes each loop — that number drives the LED brightness directly.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-item" id="t4" onclick="toggle('t4')" title="Click to tick off">
+        <div class="task-num" id="n4">4</div>
+        <div>
+          <div class="task-title" id="ttl4">Charge your laptop. Bring it sorted.</div>
+          <div class="task-body">
+            <p>Same drill as last time — bring your laptop with at least <strong>80% battery</strong> so we don't lose anyone halfway through a gradient.</p>
+            <div class="tip">mBlock works best when plugged in. Bring your charger too if you have it.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-label">
+        <span>Mission 04 progress</span>
+        <span id="progress-count">0 / 4</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+      <div class="progress-msg" id="progress-msg"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section" id="cta-section" style="display:none;opacity:0;transform:translateY(16px);transition:opacity .4s ease,transform .4s ease;">
+    <p>You're warmed up. Let us know.<br /><span style="font-size:12.5px;color:var(--muted);">30-second check-in so we know who's ready — and you can share which breathing light you spotted.</span></p>
+    <a class="cta-btn" href="https://forms.gle/1CY5mPwtL98uviz3A" target="_blank">I'm Ready — Check Me In →</a>
+  </div>
+
+  <!-- FOOTER CALLOUT -->
+  <div class="footer-callout">
+    <div class="fc-icon">💡</div>
+    <p>Breathe slowly.<br />Bring your laptop. Remember the RGB values. We'll bring the variables.</p>
+    <div class="fc-sub">Robotlab · infinite possibilities</div>
+  </div>
+
+</div><!-- /content -->
+
+<footer class="site-footer">Robotlab · Pre-class · Lesson 04 · Breathe Slowly</footer>
+
+<script>
+  const KEY = 'rl-l04';
+  const ids = ['t1','t2','t3','t4'];
+  const msgs = ['','One down — keep going.','Halfway there.','Almost! One more.','Sweet — you\'re warmed up. See you in class. 🎉'];
+  let s = {};
+  try { s = JSON.parse(localStorage.getItem(KEY)||'{}'); } catch(e){}
+
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(s)); }catch(e){} }
+
+  function render(){
+    const done = ids.filter(id=>s[id]).length;
+    document.getElementById('progress-count').textContent = done+' / 4';
+    document.getElementById('progress-bar').style.width = (done/4*100)+'%';
+    document.getElementById('progress-msg').textContent = msgs[done];
+    ids.forEach((id,i)=>{
+      const el=document.getElementById(id);
+      const nm=document.getElementById('n'+(i+1));
+      if(el){ 
+        if(s[id]){
+          el.classList.add('is-done');
+          if(nm) nm.textContent='✓';
+        } else {
+          el.classList.remove('is-done');
+          if(nm) nm.textContent=(i+1);
+        }
+      }
+    });
+    // Show CTA only when all 4 done
+    const cta = document.getElementById('cta-section');
+    if(done === 4){
+      cta.style.display = 'block';
+      // Trigger animation after display:block kicks in
+      requestAnimationFrame(()=>{
+        requestAnimationFrame(()=>{
+          cta.style.opacity = '1';
+          cta.style.transform = 'translateY(0)';
+        });
+      });
+      // Scroll into view smoothly if just completed
+      if(done === 4 && window._lastDone !== 4){
+        setTimeout(()=>{ cta.scrollIntoView({behavior:'smooth', block:'center'}); }, 200);
+      }
+    } else {
+      cta.style.opacity = '0';
+      cta.style.transform = 'translateY(16px)';
+      setTimeout(()=>{ if(done!==4) cta.style.display='none'; }, 400);
+    }
+    window._lastDone = done;
+  }
+
+  function toggle(id){ s[id]=!s[id]; save(); render(); }
+  render();
+</script>
+</body>
+</html>

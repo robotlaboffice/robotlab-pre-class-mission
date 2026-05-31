@@ -406,49 +406,57 @@ let sv=0;document.querySelectorAll('.star').forEach(s=>{s.addEventListener('mous
 document.querySelectorAll('.ro').forEach(o=>{o.querySelector('input').addEventListener('change',()=>{o.closest('.rg2').querySelectorAll('.ro').forEach(x=>x.classList.remove('chosen'));o.classList.add('chosen');});});
 
 // Submit to Google Sheets
-document.getElementById('checkinForm').addEventListener('submit', async function(e){
+document.getElementById('checkinForm').addEventListener('submit', async function(e) {
 
-    e.preventDefault();
+```
+e.preventDefault();
 
-    const selectedQ2 =
-  document.querySelector('input[name="q2"]:checked')
+const form = e.target;
+
+const selectedQ2 =
+    document.querySelector('input[name="q2"]:checked')
     ?.parentElement.innerText || '';
 
-    const formData = {
-        name: this.name.value,
-        class_group: this.class_group.value,
-        q1: this.q1.value,
-        q2: selectedQ2,
-        q3: this.q3.value,
-        q4: this.q4.value,
-        q5: this.q5.value,
-        readiness: this.readiness.value,
-        question: this.question.value
-    };
+const formData = {
+    name: form.elements['name'].value,
+    class_group: form.elements['class_group'].value,
+    q1: form.elements['q1'].value,
+    q2: selectedQ2,
+    q3: form.elements['q3'].value,
+    q4: form.elements['q4'].value,
+    q5: form.elements['q5'].value,
+    readiness: form.elements['readiness'].value,
+    question: form.elements['question'].value
+};
 
-    try {
+try {
 
-        await fetch(
-    'https://script.google.com/macros/s/AKfycbxxL7cvU1YL92N704ck3cNhbWHGOC6kCqHyk0wMf_e2m9PBOsRc2J8dS7XGzzmUp52l/exec',
-    {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    }
-);
+    const response = await fetch(
+        'https://script.google.com/macros/s/AKfycbxxL7cvU1YL92N704ck3cNhbWHGOC6kCqHyk0wMf_e2m9PBOsRc2J8dS7XGzzmUp52l/exec',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        }
+    );
 
-        this.style.display = 'none';
-        document.getElementById('succState').style.display = 'block';
+    console.log('Submitted', await response.text());
 
-    } catch(err) {
+    form.style.display = 'none';
+    document.getElementById('succState').style.display = 'block';
 
-        alert('Submission failed. Please try again.');
+} catch (err) {
 
-        console.error(err);
-    }
+    console.error(err);
+    alert('Submission failed. Please try again.');
+
+}
+```
+
 });
+
 
 
 </body></html>

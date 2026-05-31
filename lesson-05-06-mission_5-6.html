@@ -405,9 +405,49 @@ let sv=0;document.querySelectorAll('.star').forEach(s=>{s.addEventListener('mous
 // Radio highlight
 document.querySelectorAll('.ro').forEach(o=>{o.querySelector('input').addEventListener('change',()=>{o.closest('.rg2').querySelectorAll('.ro').forEach(x=>x.classList.remove('chosen'));o.classList.add('chosen');});});
 
-// Submit
-document.getElementById('checkinForm').addEventListener('submit',function(e){e.preventDefault();this.style.display='none';document.getElementById('succState').style.display='block';});
-</script>
+// Submit to Google Sheets
+document.getElementById('checkinForm').addEventListener('submit', async function(e){
+
+    e.preventDefault();
+
+    const selectedQ2 =
+      document.querySelector('input[name="q2"]:checked')?.value || '';
+
+    const formData = {
+        name: this.name.value,
+        class_group: this.class_group.value,
+        q1: this.q1.value,
+        q2: selectedQ2,
+        q3: this.q3.value,
+        q4: this.q4.value,
+        q5: this.q5.value,
+        readiness: this.readiness.value,
+        question: this.question.value
+    };
+
+    try {
+
+        await fetch(
+            'YOUR_GOOGLE_APPS_SCRIPT_URL',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            }
+        );
+
+        this.style.display = 'none';
+        document.getElementById('succState').style.display = 'block';
+
+    } catch(err) {
+
+        alert('Submission failed. Please try again.');
+
+        console.error(err);
+    }
+});
 
 
 </body></html>

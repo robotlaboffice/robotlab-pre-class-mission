@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)file:///Users/savingsolutions/Downloads/lesson-56-mission_3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pre-class · Lesson 05 &amp; 06 · Screen Display &amp; Unique Sound</title>
+<link href="./lesson-05-06-mission_5-6_files/css2" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f7f5;--card:#fff;--text:#1a1a1a;--muted:#6b6b6b;--border:#e5e5e2;--blue:#1565C0;--blue-dim:#e8f0fd;--orange:#e8622a;--green:#2d7a3a;--radius:10px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:13px;font-weight:700;color:var(--text);padding:16px 0;margin-right:24px;letter-spacing:-.01em;flex-shrink:0}
+.nav-logo span{display:block;font-size:10px;font-weight:400;color:var(--muted);letter-spacing:.02em}
+.nav-lessons{display:flex;overflow-x:auto}
+.nl{padding:18px 14px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap}
+.nl.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
+.nbadge{display:inline-block;background:var(--blue);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;vertical-align:middle}
+.hero{max-width:760px;margin:0 auto;padding:64px 24px 48px}
+.hero-label{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-.03em;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero-desc{font-size:15px;color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:32px}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.hmi{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.hmi strong{color:var(--text);font-weight:600}
+.hmd{width:4px;height:4px;background:var(--border);border-radius:50%}
+.sec{max-width:760px;margin:0 auto;padding:0 24px 64px}
+.sec-hdr{display:flex;align-items:baseline;gap:16px;margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.sec-num{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.sec-title{font-size:1.25rem;font-weight:700;letter-spacing:-.02em}
+.sec-time{font-size:11px;color:var(--muted);margin-left:auto;flex-shrink:0}
+.recap-intro{font-size:13px;color:var(--muted);margin-bottom:20px}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.rg,.pg,.form-row{grid-template-columns:1fr}}
+.rc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.rc-icon{font-size:20px;margin-bottom:10px}
+.rc h3{font-size:13px;font-weight:700;margin-bottom:6px}
+.rc p{font-size:13px;color:var(--muted);line-height:1.6}
+.rc code,.tlist li code,.thinq code{font-size:12px;background:#f0f0ee;padding:1px 5px;border-radius:4px;font-family:monospace;color:var(--text)}
+.prev-intro{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.7}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;overflow:hidden}
+.pc-sub{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.pc-sub span{color:var(--blue)}
+.pc h3{font-size:15px;font-weight:700;margin-bottom:4px}
+.pc p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px}
+.sdemo{width:100%;height:90px;background:#111827;border-radius:8px;overflow:hidden;padding:10px}
+.scontent{font-family:monospace;font-size:11px;color:#67e8f9;line-height:1.7}
+.ndemo{width:100%;height:90px;background:#0f1f0f;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:5px;padding:10px}
+.nb{width:7px;border-radius:4px;background:#4ade80;animation:sw 1.2s ease-in-out infinite}
+.nb:nth-child(1){height:18px;animation-delay:0s}.nb:nth-child(2){height:32px;animation-delay:.1s}
+.nb:nth-child(3){height:55px;animation-delay:.2s}.nb:nth-child(4){height:38px;animation-delay:.3s}
+.nb:nth-child(5){height:65px;animation-delay:.15s}.nb:nth-child(6){height:42px;animation-delay:.25s}
+.nb:nth-child(7){height:28px;animation-delay:.05s}.nb:nth-child(8){height:48px;animation-delay:.35s}
+.nb:nth-child(9){height:22px;animation-delay:.1s}
+@keyframes sw{0%,100%{transform:scaleY(.25);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+.pnote{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;display:flex;align-items:flex-start;gap:10px}
+.pnarr{color:var(--blue);font-weight:700;flex-shrink:0}
+.task-intro{font-size:14px;color:var(--muted);margin-bottom:10px;line-height:1.7}
+.task-hint{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:24px;display:flex;align-items:flex-start;gap:10px}
+.tasks{display:flex;flex-direction:column;gap:2px}
+.task{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color .15s}
+.task:hover{border-color:#ccc}
+.task.done{background:#f9fdf9;border-color:#c3dfc7}
+.task-top{padding:18px 20px;display:flex;align-items:flex-start;gap:14px}
+.task-chk{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:.2s;background:#fff}
+.task.done .task-chk{background:var(--green);border-color:var(--green)}
+.task-chk svg{opacity:0;transition:.15s;width:12px;height:12px}
+.task.done .task-chk svg{opacity:1}
+.tnl{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.tbody h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.tbody p{font-size:13px;color:var(--muted);line-height:1.6}
+.task-exp{padding:0 20px 20px 56px;display:none}
+.task.open .task-exp{display:block}
+.task-exp-inner{border-top:1px solid var(--border);padding-top:16px}
+.td{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.tlist{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tlist li{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.sl{color:var(--border);font-weight:700;flex-shrink:0;margin-top:1px}
+.tlist li strong{color:var(--text)}
+.thinq{background:#f0f5ff;border-left:3px solid var(--blue);border-radius:0 6px 6px 0;padding:12px 14px;margin-top:14px;font-size:13px;color:var(--muted);line-height:1.6}
+.thinq strong{color:var(--blue);display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;font-weight:700}
+.cb{background:#1c1c1e;border-radius:8px;padding:16px;margin:12px 0;font-family:monospace;font-size:12px;line-height:1.9;color:#e5e5e5;overflow-x:auto;white-space:pre}
+.cb .c{color:#6b7280;font-style:italic}.cb .k{color:#7dd3fc}.cb .v{color:#86efac}.cb .n{color:#fcd34d}
+/* PROGRESS */
+.prog-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:20px}
+.prog-lbl{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between}
+.prog-lbl span{color:var(--muted);font-weight:400}
+.prog-trk{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--green);border-radius:3px;transition:.4s;width:0%}
+.prog-hint{font-size:12px;color:var(--muted);margin-top:10px}
+/* FORM SECTION */
+.form-section-wrap{margin-top:0}
+/* LOCKED STATE */
+.form-locked{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:48px 32px;text-align:center}
+.lock-icon{font-size:2.5rem;margin-bottom:16px;opacity:.35}
+.lock-title{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+.lock-desc{font-size:13px;color:var(--muted);line-height:1.6;max-width:360px;margin:0 auto}
+.lock-progress{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px}
+.lock-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:.3s}
+.lock-dot.done{background:var(--green)}
+/* UNLOCKED / IFRAME */
+.form-unlocked{display:none}
+.form-unlocked-header{background:var(--card);border:1px solid var(--border);border-top-left-radius:var(--radius);border-top-right-radius:var(--radius);padding:20px 24px;border-bottom:none}
+.form-unlocked-header h3{font-size:1rem;font-weight:700;margin-bottom:4px}
+.form-unlocked-header p{font-size:13px;color:var(--muted)}
+.unlock-badge{display:inline-flex;align-items:center;gap:6px;background:#eaf5ec;color:var(--green);font-size:11px;font-weight:700;padding:4px 10px;border-radius:50px;margin-bottom:12px;letter-spacing:.03em}
+.gform-iframe{width:100%;height:900px;border:1px solid var(--border);border-top:none;border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);display:block;background:#fff}
+/* UNLOCK ANIMATION */
+@keyframes unlockPop{0%{transform:scale(.95);opacity:0}100%{transform:scale(1);opacity:1}}
+.form-unlocked.show{display:block;animation:unlockPop .35s ease}
+footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:12px;color:var(--muted)}
+footer strong{color:var(--text)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Robotlab<span>infinite possibilities</span></div>
+  <div class="nav-lessons">
+    <a class="nl" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-01-mission_1.html">LESSON 01</a>
+    <a class="nl" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-02-mission_2.html">LESSON 02</a>
+    <a class="nl" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-03-mission_3.html">LESSON 03</a>
+    <a class="nl" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-04-mission_4.html">LESSON 04</a>
+    <a class="nl active" href="file:///Users/savingsolutions/Downloads/lesson-56-mission_3.html#">MISSION 05·06 <span class="nbadge">ACTIVE</span></a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Pre-class · Lesson 05 &amp; 06</div>
+  <h1>Now let's make<br>the screen <em>talk</em><br>and Little M <em>sing</em>.</h1>
+  <p class="hero-desc">Last class you took full control of colour with RGB values, breathing lamps, and colour gradients. Next class you'll display text, tables, and emoji on Little M's TFT screen — then give it a voice and teach it to play music. Quick prep below so we hit the ground running.</p>
+  <div class="hero-meta">
+    <div class="hmi">⏱ <strong>~15 min</strong></div>
+    <div class="hmd"></div>
+    <div class="hmi">🖥️ <strong>Laptop + mBlock</strong></div>
+    <div class="hmd"></div>
+    <div class="hmi">🤖 <strong>No robot needed</strong></div>
+  </div>
+</div>
+
+<!-- 01 RECAP -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">01</span>
+    <span class="sec-title">Quick Recap · Last lesson</span>
+    <span class="sec-time">3 min</span>
+  </div>
+  <div class="recap-intro">Do you still remember these?</div>
+  <div class="rg">
+    <div class="rc"><div class="rc-icon">🎨</div><h3>RGB Colour Model</h3><p>Three values — Red, Green, Blue — each 0 to 255. Mix them to make any colour. <code>R255 G255 B0</code> = Yellow. All zeros = lights off.</p></div>
+    <div class="rc"><div class="rc-icon">🌬️</div><h3>Breathing Lamp</h3><p>A variable <code>brightness</code> counts 0 → 255 then back down. The LED fades in and out — like an inhale and exhale on repeat.</p></div>
+    <div class="rc"><div class="rc-icon">🔁</div><h3>Repeat Until Loop</h3><p><code>repeat until brightness &gt; 255</code> — the loop keeps going until the condition is true. Change by 5 = fast fade. Change by 1 = smooth.</p></div>
+    <div class="rc"><div class="rc-icon">🌈</div><h3>Colour Gradient</h3><p>R drops as G rises — Red → Yellow → Green. Two variables moving in opposite directions create a smooth colour shift.</p></div>
+  </div>
+</div>
+
+<!-- 02 PREVIEW -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">02</span>
+    <span class="sec-title">Preview · What you'll build</span>
+    <span class="sec-time">2 min</span>
+  </div>
+  <p class="prev-intro">Next class you'll use Little M's TFT screen and built-in speaker to build two kinds of output. Watch them animate below — same robot, completely different behaviour.</p>
+  <div class="pg">
+    <div class="pc">
+      <div class="pc-sub"><span>Lesson 05</span> · Screen Display</div>
+      <h3>Text · Tables · Emoji</h3>
+      <p>Print lines, pin labels at XY positions, build a live countdown, and show AI emoji on a 128×128 pixel TFT screen.</p>
+      <div class="sdemo"><div class="scontent" id="sc"><div>&gt; Countdown:  9</div><div>&gt; Countdown:  8</div><div>★ Name | Score</div><div>  Xiao |  95  </div><div>  Ming |  88  </div></div></div>
+    </div>
+    <div class="pc">
+      <div class="pc-sub"><span>Lesson 06</span> · Unique Sound</div>
+      <h3>Sounds · Notes · Music</h3>
+      <p>Control volume, play built-in sounds, and use the piano module to play C D E F G A B — even compose a short tune.</p>
+      <div class="ndemo">
+        <div class="nb"></div><div class="nb"></div><div class="nb"></div>
+        <div class="nb"></div><div class="nb"></div><div class="nb"></div>
+        <div class="nb"></div><div class="nb"></div><div class="nb"></div>
+      </div>
+    </div>
+  </div>
+  <div class="pnote"><span class="pnarr">→</span><span>Don't worry about how to code these yet. Just notice what's changing — text or position? One sound or a melody? It'll click in class.</span></div>
+</div>
+
+<!-- 03 TASKS -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">03</span>
+    <span class="sec-title">Before class · Tick when done</span>
+    <span class="sec-time">10 min</span>
+  </div>
+  <p class="task-intro">No robot needed — these are quick brain warm-ups so we can move fast in class. Tap a task to tick it off — it saves automatically.</p>
+  <div class="task-hint"><span>👆</span><span>Click anywhere on a task row to mark it done. Tick all 4 to unlock the check-in form below.</span></div>
+
+  <div class="tasks" id="taskList">
+
+    <div class="task" data-id="t1">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"></polyline></svg></div>
+        <div class="tbody">
+          <div class="tnl">Task 01</div>
+          <h4>Learn the three screen display methods</h4>
+          <p>Little M has a 1.44-inch TFT screen (128×128 px). There are three ways to put content on it — know the difference before class.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <p class="td">Every pixel on Little M's TFT screen is individually controlled. In mBlock you choose how to lay out content:</p>
+        <ul class="tlist">
+          <li><span class="sl">/</span><span><strong>Screen Printing</strong> — prints text line by line, wraps at the edge. Content accumulates — use <code>clear screen</code> before reprinting.</span></li>
+          <li><span class="sl">/</span><span><strong>Label Display</strong> — pins text to a specific XY position or named corner. Same label number = overwrites in place. No clear needed.</span></li>
+          <li><span class="sl">/</span><span><strong>Table Display</strong> — up to 4 rows × 3 columns. Enter content cell by cell. Great for structured data like scores.</span></li>
+        </ul>
+        <div class="thinq"><strong>Think before class</strong>You want to show a timer that updates every second. Which method — Screen Printing or Label Display? Why?</div>
+      </div></div>
+    </div>
+
+    <div class="task" data-id="t2">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"></polyline></svg></div>
+        <div class="tbody">
+          <div class="tnl">Task 02</div>
+          <h4>Read this screen loop — predict what it does</h4>
+          <p>In class we'll build a countdown using a variable and a label. Read the code below and think through what happens.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <div class="cb"><span class="k">set</span> <span class="n">Time</span> <span class="k">to</span> <span class="v">10</span>                      <span class="c">start from 10</span>
+<span class="k">repeat</span> <span class="v">10</span>
+  <span class="k">play</span> click                         <span class="c">tick each second</span>
+  <span class="k">show label</span> <span class="v">1</span> · <span class="n">Time</span> · center · big    <span class="c">display number</span>
+  <span class="k">wait</span> <span class="v">1</span> second
+  <span class="k">change</span> <span class="n">Time</span> <span class="k">by</span> <span class="v">-1</span>                 <span class="c">count down</span>
+<span class="k">play</span> beeps                          <span class="c">alarm at the end</span>
+<span class="k">LED all</span> R<span class="v">255</span> G<span class="v">0</span> B<span class="v">0</span> for <span class="v">1</span>s          <span class="c">red flash</span></div>
+        <ul class="tlist">
+          <li><span class="sl">/</span><span>Why don't we need <code>clear screen</code> here? (Hint: same label number)</span></li>
+          <li><span class="sl">/</span><span>What does the robot look and sound like when the loop ends?</span></li>
+          <li><span class="sl">/</span><span>If you changed <code>Time to 10</code> → <code>Time to 20</code>, what else needs to change?</span></li>
+        </ul>
+        <div class="thinq"><strong>Key insight</strong>Label Display with the same label number overwrites itself in place — no accumulation, no clearing needed. Perfect for live timers and scores.</div>
+      </div></div>
+    </div>
+
+    <div class="task" data-id="t3">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"></polyline></svg></div>
+        <div class="tbody">
+          <div class="tnl">Task 03</div>
+          <h4>Memorise the musical note numbers</h4>
+          <p>Little M plays notes using MIDI numbers. The piano block covers C to B — memorise these seven before class.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <div class="cb">C  (Do) = <span class="v">60</span>
+D  (Re) = <span class="v">62</span>
+E  (Mi) = <span class="v">64</span>
+F  (Fa) = <span class="v">65</span>
+G  (So) = <span class="v">67</span>
+A  (La) = <span class="v">69</span>
+B  (Ti) = <span class="v">71</span></div>
+        <p class="td">Beat = duration: <code>0.25 beat = 0.25s</code> · <code>0.5 beat = 0.5s</code> · <code>1 beat = 1s</code> · <code>2 beats = 2s</code>. Use ← → arrows to change octave.</p>
+        <ul class="tlist">
+          <li><span class="sl">/</span><span>Quick test — without looking: what number is G? What number is C?</span></li>
+          <li><span class="sl">/</span><span>Notice: C→D is +2, but E→F is only +1. Why the uneven gaps?</span></li>
+        </ul>
+        <div class="thinq"><strong>Think before class</strong>Do Re Mi Fa Sol = 60, 62, 64, 65, 67. What would La (A) be? Figure it out from the pattern.</div>
+      </div></div>
+    </div>
+
+    <div class="task" data-id="t4">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"></polyline></svg></div>
+        <div class="tbody">
+          <div class="tnl">Task 04</div>
+          <h4>Charge your laptop. Bring it sorted.</h4>
+          <p>Same drill as last time — bring your laptop with at least 80% battery so we don't lose anyone halfway through a melody.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <ul class="tlist">
+          <li><span class="sl">/</span><span><strong>mBlock open and ready</strong> — open it before class, not during.</span></li>
+          <li><span class="sl">/</span><span><strong>80%+ battery</strong> — or bring your charger. Sound and screen sessions run long.</span></li>
+          <li><span class="sl">/</span><span><strong>Headphones optional</strong> — Little M has a speaker, but headphones help in a quiet space.</span></li>
+        </ul>
+      </div></div>
+    </div>
+
+  </div><!-- end tasks -->
+
+  <!-- PROGRESS BAR -->
+  <div class="prog-wrap">
+    <div class="prog-lbl">Mission 05·06 progress <span id="progTxt">0 / 4</span></div>
+    <div class="prog-trk"><div class="prog-fill" id="progFill" style="width: 0%;"></div></div>
+    <div class="prog-hint" id="progHint">💡 Tick all 4 tasks to unlock the check-in form below.</div>
+  </div>
+</div>
+
+<!-- 04 CHECK-IN -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">04</span>
+    <span class="sec-title">Check-in · Submit before class</span>
+    <span class="sec-time">2 min</span>
+  </div>
+
+  <div class="form-section-wrap">
+
+    <!-- LOCKED -->
+    <div class="form-locked" id="formLocked" style="display: block;">
+      <div class="lock-icon">🔒</div>
+      <div class="lock-title">Complete all 4 tasks to unlock</div>
+      <div class="lock-desc">Tick off all four tasks above and this check-in form will open automatically.</div>
+      <div class="lock-progress" id="lockDots">
+        <div class="lock-dot" id="ld1"></div>
+        <div class="lock-dot" id="ld2"></div>
+        <div class="lock-dot" id="ld3"></div>
+        <div class="lock-dot" id="ld4"></div>
+      </div>
+    </div>
+
+    <!-- UNLOCKED — Google Form iframe -->
+    <div class="form-unlocked" id="formUnlocked">
+      <div class="form-unlocked-header">
+        <div class="unlock-badge">✓ &nbsp;All tasks complete</div>
+        <h3>Pre-class check-in form</h3>
+        <p>Fill in the form below — your answers go straight to the class spreadsheet.</p>
+      </div>
+      <iframe class="gform-iframe" id="gformIframe" src="./lesson-05-06-mission_5-6_files/saved_resource.html" frameborder="0" marginheight="0" marginwidth="0" title="Pre-class Check-in Form">
+        Loading…
+      </iframe>
+    </div>
+
+  </div>
+</div>
+
+<footer><strong>Robotlab</strong> · infinite possibilities &nbsp;·&nbsp; Pre-class · Lesson 05 &amp; 06 · Screen Display &amp; Unique Sound</footer>
+
+<script>
+// ── GOOGLE FORM URL ──
+// Using the /viewform URL so students can fill it in
+const GFORM_URL = 'https://docs.google.com/forms/d/13Y_nnoYCl2VwKzvPG1MD5Tx2lFVkiTAqAJ6IBF6hs34/viewform?embedded=true';
+
+// ── SCREEN ANIMATION ──
+const lines=['Hello! I\'m Little M!','> Countdown: 10','> Countdown:  9','> Countdown:  8','★ Name | Score','  Xiao |  95  ','  Ming |  88  ','😎 Emoji: Cool'];
+let li=0;const disp=[];const sc=document.getElementById('sc');
+function tick(){if(disp.length>=5)disp.shift();disp.push(lines[li++%lines.length]);sc.innerHTML=disp.map(l=>'<div>'+l+'</div>').join('');setTimeout(tick,900);}
+tick();
+
+// ── TASKS ──
+const KEY='rl_56';
+const saved=JSON.parse(localStorage.getItem(KEY)||'{}');
+
+function countDone(){return document.querySelectorAll('.task.done').length;}
+
+function updateLockDots(done){
+  for(let i=1;i<=4;i++){
+    document.getElementById('ld'+i).classList.toggle('done', i<=done);
+  }
+}
+
+function checkUnlock(){
+  const done=countDone();
+  const hints=[
+    '💡 Tick all 4 tasks to unlock the check-in form below.',
+    '1 down, 3 to go — keep going!',
+    'Halfway there! 2 more to go.',
+    'Almost done! One last task.',
+    '🎉 All done! Check-in form is now open below. ↓'
+  ];
+  document.getElementById('progTxt').textContent=done+' / 4';
+  document.getElementById('progFill').style.width=(done/4*100)+'%';
+  document.getElementById('progHint').textContent=hints[done];
+  updateLockDots(done);
+
+  if(done===4){
+    // unlock form
+    const locked=document.getElementById('formLocked');
+    const unlocked=document.getElementById('formUnlocked');
+    locked.style.display='none';
+    // load iframe src only when unlocking (avoid loading on page open)
+    document.getElementById('gformIframe').src=GFORM_URL;
+    unlocked.classList.add('show');
+    // smooth scroll to form after short delay
+    setTimeout(()=>{ unlocked.scrollIntoView({behavior:'smooth',block:'start'}); }, 400);
+  } else {
+    document.getElementById('formLocked').style.display='block';
+    document.getElementById('formUnlocked').classList.remove('show');
+    document.getElementById('gformIframe').src='';
+  }
+}
+
+document.querySelectorAll('.task').forEach(t=>{
+  const id=t.dataset.id;
+  if(saved[id]) t.classList.add('done');
+
+  t.addEventListener('click',function(e){
+    if(e.target.closest('input,textarea,a,button')) return;
+
+    // toggle done on task-top click
+    if(e.target.closest('.task-top')){
+      this.classList.toggle('done');
+      saved[id]=this.classList.contains('done');
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      checkUnlock();
+    }
+    // toggle expand
+    const isOpen=this.classList.contains('open');
+    document.querySelectorAll('.task').forEach(x=>x.classList.remove('open'));
+    if(!isOpen) this.classList.add('open');
+  });
+});
+
+// init on load
+checkUnlock();
+</script>
+
+
+</body></html>

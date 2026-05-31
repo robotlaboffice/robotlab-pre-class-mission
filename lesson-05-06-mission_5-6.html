@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)file:///Users/savingsolutions/Downloads/lesson-56-mission_2.html# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pre-class · Lesson 05 &amp; 06 · Screen Display &amp; Unique Sound</title>
+<link href="./lesson-05-06-mission_5-6_files/css2" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f7f5;--card:#fff;--text:#1a1a1a;--muted:#6b6b6b;--border:#e5e5e2;--blue:#1565C0;--blue-dim:#e8f0fd;--orange:#e8622a;--green:#2d7a3a;--radius:10px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:13px;font-weight:700;color:var(--text);padding:16px 0;margin-right:24px;letter-spacing:-.01em;flex-shrink:0}
+.nav-logo span{display:block;font-size:10px;font-weight:400;color:var(--muted);letter-spacing:.02em}
+.nav-lessons{display:flex;overflow-x:auto}
+.nl{padding:18px 14px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap}
+.nl.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
+.nbadge{display:inline-block;background:var(--blue);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;vertical-align:middle}
+.hero{max-width:760px;margin:0 auto;padding:64px 24px 48px}
+.hero-label{font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-.03em;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero-desc{font-size:15px;color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:32px}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.hmi{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.hmi strong{color:var(--text);font-weight:600}
+.hmd{width:4px;height:4px;background:var(--border);border-radius:50%}
+.sec{max-width:760px;margin:0 auto;padding:0 24px 64px}
+.sec-hdr{display:flex;align-items:baseline;gap:16px;margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.sec-num{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.sec-title{font-size:1.25rem;font-weight:700;letter-spacing:-.02em}
+.sec-time{font-size:11px;color:var(--muted);margin-left:auto;flex-shrink:0}
+.recap-intro{font-size:13px;color:var(--muted);margin-bottom:20px}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.rg,.pg{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+.rc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.rc-icon{font-size:20px;margin-bottom:10px}
+.rc h3{font-size:13px;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
+.rc p{font-size:13px;color:var(--muted);line-height:1.6}
+.rc code{font-size:12px;background:#f0f0ee;padding:1px 5px;border-radius:4px;font-family:monospace;color:var(--text)}
+.prev-intro{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.7}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;overflow:hidden}
+.pc-sub{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.pc-sub span{color:var(--blue)}
+.pc h3{font-size:15px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.pc p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px}
+.sdemo{width:100%;height:90px;background:#111827;border-radius:8px;overflow:hidden;padding:10px}
+.scontent{font-family:monospace;font-size:11px;color:#67e8f9;line-height:1.7}
+.ndemo{width:100%;height:90px;background:#0f1f0f;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:5px;padding:10px}
+.nb{width:7px;border-radius:4px;background:#4ade80;animation:sw 1.2s ease-in-out infinite}
+.nb:nth-child(1){height:18px;animation-delay:0s}.nb:nth-child(2){height:32px;animation-delay:.1s}
+.nb:nth-child(3){height:55px;animation-delay:.2s}.nb:nth-child(4){height:38px;animation-delay:.3s}
+.nb:nth-child(5){height:65px;animation-delay:.15s}.nb:nth-child(6){height:42px;animation-delay:.25s}
+.nb:nth-child(7){height:28px;animation-delay:.05s}.nb:nth-child(8){height:48px;animation-delay:.35s}
+.nb:nth-child(9){height:22px;animation-delay:.1s}
+@keyframes sw{0%,100%{transform:scaleY(.25);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+.pnote{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;display:flex;align-items:flex-start;gap:10px}
+.pnarr{color:var(--blue);font-weight:700;flex-shrink:0}
+.task-intro{font-size:14px;color:var(--muted);margin-bottom:10px;line-height:1.7}
+.task-hint{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:24px;display:flex;align-items:flex-start;gap:10px}
+.tasks{display:flex;flex-direction:column;gap:2px}
+.task{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color .15s}
+.task:hover{border-color:#ccc}
+.task.done{background:#f9fdf9;border-color:#c3dfc7}
+.task-top{padding:18px 20px;display:flex;align-items:flex-start;gap:14px}
+.task-chk{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:.2s;background:#fff}
+.task.done .task-chk{background:var(--green);border-color:var(--green)}
+.task-chk svg{opacity:0;transition:.15s;width:12px;height:12px}
+.task.done .task-chk svg{opacity:1}
+.tnl{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.tbody h4{font-size:14px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.tbody p{font-size:13px;color:var(--muted);line-height:1.6}
+.task-exp{padding:0 20px 20px 56px;display:none}
+.task.open .task-exp{display:block}
+.task-exp-inner{border-top:1px solid var(--border);padding-top:16px}
+.td{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.tlist{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tlist li{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.sl{color:var(--border);font-weight:700;flex-shrink:0;margin-top:1px}
+.tlist li strong{color:var(--text)}
+.tlist li code{font-size:12px;background:#f0f0ee;padding:1px 4px;border-radius:3px;font-family:monospace;color:var(--text)}
+.thinq{background:#f0f5ff;border-left:3px solid var(--blue);border-radius:0 6px 6px 0;padding:12px 14px;margin-top:14px;font-size:13px;color:var(--muted);line-height:1.6}
+.thinq strong{color:var(--blue);display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;font-weight:700}
+.cb{background:#1c1c1e;border-radius:8px;padding:16px;margin:12px 0;font-family:monospace;font-size:12px;line-height:1.9;color:#e5e5e5;overflow-x:auto;white-space:pre}
+.cb .c{color:#6b7280;font-style:italic}.cb .k{color:#7dd3fc}.cb .v{color:#86efac}.cb .n{color:#fcd34d}
+.prog-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:20px}
+.prog-lbl{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between}
+.prog-lbl span{color:var(--muted);font-weight:400}
+.prog-trk{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--green);border-radius:3px;transition:.4s;width:0%}
+.prog-hint{font-size:12px;color:var(--muted);margin-top:10px}
+.fs{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px}
+.fs-title{font-size:1rem;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.fs-sub{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6}
+.fg{margin-bottom:20px}
+.fl{display:block;font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text);line-height:1.5}
+.fl .req{color:var(--orange);margin-left:2px}
+.fl .sub{font-weight:400;color:var(--muted)}
+input[type=text],textarea{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;color:var(--text);background:#fafaf9;outline:none;transition:.15s}
+input[type=text]:focus,textarea:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(21,101,192,.08)}
+textarea{resize:vertical;min-height:80px;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.rg2{display:flex;flex-direction:column;gap:6px}
+.ro{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;color:var(--muted);transition:.15s}
+.ro:hover{border-color:#bbb;background:#fafafa}
+.ro input{accent-color:var(--blue);flex-shrink:0}
+.ro.chosen{border-color:var(--blue);background:var(--blue-dim);color:var(--text)}
+.stars{display:flex;gap:4px;margin-top:6px}
+.star{font-size:24px;cursor:pointer;opacity:.25;transition:.15s;user-select:none;color:#f59e0b}
+.star.on{opacity:1}
+.fdiv{height:1px;background:var(--border);margin:24px 0}
+.sbtn{width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.15s;letter-spacing:-.01em;margin-top:4px}
+.sbtn:hover{background:#1255a8}
+.succ{display:none;text-align:center;padding:48px 20px}
+.succ .chk{font-size:3rem;color:var(--green)}
+.succ h3{font-size:1.1rem;font-weight:700;margin:16px 0 8px}
+.succ p{font-size:13px;color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:12px;color:var(--muted)}
+footer strong{color:var(--text)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Robotlab<span>infinite possibilities</span></div>
+  <div class="nav-lessons">
+    <a class="nl" href="file:///Users/savingsolutions/Downloads/lesson-56-mission_2.html#">LESSON 01</a>
+    <a class="nl" href="file:///Users/savingsolutions/Downloads/lesson-56-mission_2.html#">LESSON 02</a>
+    <a class="nl" href="file:///Users/savingsolutions/Downloads/lesson-56-mission_2.html#">LESSON 03</a>
+    <a class="nl" href="file:///Users/savingsolutions/Downloads/lesson-56-mission_2.html#">LESSON 04</a>
+    <a class="nl active" href="file:///Users/savingsolutions/Downloads/lesson-56-mission_2.html#">MISSION 05·06 <span class="nbadge">ACTIVE</span></a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Pre-class · Lesson 05 &amp; 06</div>
+  <h1>Now let's make<br>the screen <em>talk</em><br>and Little M <em>sing</em>.</h1>
+  <p class="hero-desc">Last class you took full control of colour with RGB values, breathing lamps, and colour gradients. Next class you'll display text, tables, and emoji on Little M's TFT screen — then give it a voice and teach it to play music. Quick prep below so we hit the ground running.</p>
+  <div class="hero-meta">
+    <div class="hmi">⏱ <strong>~15 min</strong></div>
+    <div class="hmd"></div>
+    <div class="hmi">🖥️ <strong>Laptop + mBlock</strong></div>
+    <div class="hmd"></div>
+    <div class="hmi">🤖 <strong>No robot needed</strong></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">01</span>
+    <span class="sec-title">Quick Recap · Last lesson</span>
+    <span class="sec-time">3 min</span>
+  </div>
+  <div class="recap-intro">Do you still remember these?</div>
+  <div class="rg">
+    <div class="rc"><div class="rc-icon">🎨</div><h3>RGB Colour Model</h3><p>Three values — Red, Green, Blue — each 0 to 255. Mix them to make any colour. <code>R255 G255 B0</code> = Yellow. All zeros = lights off.</p></div>
+    <div class="rc"><div class="rc-icon">🌬️</div><h3>Breathing Lamp</h3><p>A variable <code>brightness</code> counts 0 → 255 then back down. The LED fades in and out — like an inhale and exhale on repeat.</p></div>
+    <div class="rc"><div class="rc-icon">🔁</div><h3>Repeat Until Loop</h3><p><code>repeat until brightness &gt; 255</code> — the loop keeps going until the condition is true. Change by 5 = fast fade. Change by 1 = smooth.</p></div>
+    <div class="rc"><div class="rc-icon">🌈</div><h3>Colour Gradient</h3><p>R drops as G rises — Red → Yellow → Green. Two variables moving in opposite directions create a smooth colour shift.</p></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">02</span>
+    <span class="sec-title">Preview · What you'll build</span>
+    <span class="sec-time">2 min</span>
+  </div>
+  <p class="prev-intro">Next class you'll use Little M's TFT screen and built-in speaker to build two kinds of output. Watch them animate below — same robot, completely different behaviour.</p>
+  <div class="pg">
+    <div class="pc">
+      <div class="pc-sub"><span>Lesson 05</span> · Screen Display</div>
+      <h3>Text · Tables · Emoji</h3>
+      <p>Print lines, pin labels at XY positions, build a live countdown, and show AI emoji on a 128×128 pixel TFT screen.</p>
+      <div class="sdemo"><div class="scontent" id="sc"><div>  Xiao |  95  </div><div>  Ming |  88  </div><div>😎 Emoji: Cool</div><div>Hello! I'm Little M!</div><div>&gt; Countdown: 10</div></div></div>
+    </div>
+    <div class="pc">
+      <div class="pc-sub"><span>Lesson 06</span> · Unique Sound</div>
+      <h3>Sounds · Notes · Music</h3>
+      <p>Control volume, play built-in sounds, and use the piano module to play C D E F G A B — even compose a short tune.</p>
+      <div class="ndemo">
+        <div class="nb"></div><div class="nb"></div><div class="nb"></div>
+        <div class="nb"></div><div class="nb"></div><div class="nb"></div>
+        <div class="nb"></div><div class="nb"></div><div class="nb"></div>
+      </div>
+    </div>
+  </div>
+  <div class="pnote"><span class="pnarr">→</span><span>Don't worry about how to code these yet. Just notice what's changing — text or position? One sound or a melody? It'll click in class.</span></div>
+</div>
+
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">03</span>
+    <span class="sec-title">Before class · Tick when done</span>
+    <span class="sec-time">10 min</span>
+  </div>
+  <p class="task-intro">No robot needed — these are quick brain warm-ups so we can move fast in class. Tap a task to tick it off — it saves automatically.</p>
+  <div class="task-hint"><span>👆</span><span>Click anywhere on a task row to mark it done. Click again to undo.</span></div>
+
+  <div class="tasks" id="taskList">
+
+    <div class="task" data-id="t1">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"></polyline></svg></div>
+        <div class="tbody">
+          <div class="tnl">Task 01</div>
+          <h4>Learn the three screen display methods</h4>
+          <p>Little M has a 1.44-inch TFT screen (128×128 px). There are three ways to put content on it — know the difference before class.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <p class="td">Every pixel on Little M's TFT screen is individually controlled. In mBlock you choose how to lay out content:</p>
+        <ul class="tlist">
+          <li><span class="sl">/</span><span><strong>Screen Printing</strong> — prints text line by line, wraps at the edge. Content accumulates on screen — use <code>clear screen</code> before reprinting.</span></li>
+          <li><span class="sl">/</span><span><strong>Label Display</strong> — pins text to a specific XY position or named corner. Same label number = overwrites in place automatically. No clear needed.</span></li>
+          <li><span class="sl">/</span><span><strong>Table Display</strong> — up to 4 rows × 3 columns. Enter content cell by cell. Great for structured data like scores or names.</span></li>
+        </ul>
+        <div class="thinq"><strong>Think before class</strong>You want to show a timer that updates every second. Which method would you use — Screen Printing or Label Display? Why?</div>
+      </div></div>
+    </div>
+
+    <div class="task" data-id="t2">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"></polyline></svg></div>
+        <div class="tbody">
+          <div class="tnl">Task 02</div>
+          <h4>Read this screen loop — predict what it does</h4>
+          <p>In class we'll build a countdown using a variable and a label. Here's the code — read it and think through what happens before class.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <div class="cb"><span class="k">set</span> <span class="n">Time</span> <span class="k">to</span> <span class="v">10</span>                      <span class="c">start from 10</span>
+<span class="k">repeat</span> <span class="v">10</span>
+  <span class="k">play</span> click                         <span class="c">tick each second</span>
+  <span class="k">show label</span> <span class="v">1</span> · <span class="n">Time</span> · center · big    <span class="c">display number</span>
+  <span class="k">wait</span> <span class="v">1</span> second
+  <span class="k">change</span> <span class="n">Time</span> <span class="k">by</span> <span class="v">-1</span>                 <span class="c">count down</span>
+<span class="k">play</span> beeps                          <span class="c">alarm at the end</span>
+<span class="k">LED all</span> R<span class="v">255</span> G<span class="v">0</span> B<span class="v">0</span> for <span class="v">1</span>s          <span class="c">red flash</span></div>
+        <p class="td">Think through these before class — no need to write anything:</p>
+        <ul class="tlist">
+          <li><span class="sl">/</span><span>Why don't we need <code>clear screen</code> here? (Hint: what does same label number do?)</span></li>
+          <li><span class="sl">/</span><span>What does the robot look and sound like when the loop ends?</span></li>
+          <li><span class="sl">/</span><span>If you changed <code>Time to 10</code> → <code>Time to 20</code>, what else needs to change?</span></li>
+        </ul>
+        <div class="thinq"><strong>Key insight</strong>Label Display with the same label number overwrites itself in place — no accumulation, no clearing needed. Perfect for live-updating data like timers and scores.</div>
+      </div></div>
+    </div>
+
+    <div class="task" data-id="t3">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"></polyline></svg></div>
+        <div class="tbody">
+          <div class="tnl">Task 03</div>
+          <h4>Memorise the musical note numbers</h4>
+          <p>Little M plays notes using MIDI numbers. The piano block covers C to B — memorise these seven before class.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <p class="td">In mBlock's piano module, every note has a number. Higher number = higher pitch. Here's the octave we'll use in class:</p>
+        <div class="cb">C  (Do) = <span class="v">60</span>
+D  (Re) = <span class="v">62</span>
+E  (Mi) = <span class="v">64</span>
+F  (Fa) = <span class="v">65</span>
+G  (So) = <span class="v">67</span>
+A  (La) = <span class="v">69</span>
+B  (Ti) = <span class="v">71</span></div>
+        <p class="td">Beat = duration: <code>0.25 beat = 0.25s</code> · <code>0.5 beat = 0.5s</code> · <code>1 beat = 1s</code> · <code>2 beats = 2s</code>. Use ← → arrows in the piano selector to move octaves.</p>
+        <ul class="tlist">
+          <li><span class="sl">/</span><span>Quick test — without looking: what number is G? What number is C?</span></li>
+          <li><span class="sl">/</span><span>Notice: C→D is +2, but E→F is only +1. Why the uneven gaps?</span></li>
+        </ul>
+        <div class="thinq"><strong>Think before class</strong>Do Re Mi Fa Sol = 60, 62, 64, 65, 67. What would La (A) be? Figure it out from the pattern before checking above.</div>
+      </div></div>
+    </div>
+
+    <div class="task" data-id="t4">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"></polyline></svg></div>
+        <div class="tbody">
+          <div class="tnl">Task 04</div>
+          <h4>Charge your laptop. Bring it sorted.</h4>
+          <p>Same drill as last time — bring your laptop with at least 80% battery so we don't lose anyone halfway through a melody.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <ul class="tlist">
+          <li><span class="sl">/</span><span><strong>mBlock open and ready</strong> — open it before class, not during.</span></li>
+          <li><span class="sl">/</span><span><strong>80%+ battery</strong> — or bring your charger. Sound and screen sessions run long.</span></li>
+          <li><span class="sl">/</span><span><strong>Headphones optional</strong> — Little M has a speaker, but headphones help in a quiet space.</span></li>
+        </ul>
+      </div></div>
+    </div>
+
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-lbl">Mission 05·06 progress <span id="progTxt">0 / 4</span></div>
+    <div class="prog-trk"><div class="prog-fill" id="progFill" style="width: 0%;"></div></div>
+    <div class="prog-hint" id="progHint">💡 Screen display · Sound effects · Bring your laptop.</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">04</span>
+    <span class="sec-title">Check-in · Submit before class</span>
+    <span class="sec-time">2 min</span>
+  </div>
+  <div class="fs">
+    <div class="fs-title">Pre-class check-in form</div>
+    <div class="fs-sub">Quick answers — no right or wrong. This helps your teacher see where everyone is before class starts. Answers go straight to the class spreadsheet.</div>
+    <form id="checkinForm">
+      <div class="form-row">
+        <div class="fg"><label class="fl">Your name <span class="req">*</span></label><input type="text" name="name" placeholder="e.g. Xiao Ming" required=""></div>
+        <div class="fg"><label class="fl">Class / Group <span class="req">*</span></label><input type="text" name="class_group" placeholder="e.g. Class 3A" required=""></div>
+      </div>
+      <div class="fdiv"></div>
+      <div class="fg">
+        <label class="fl">Q1 · What are the three ways to display content on Little M's screen? <span class="sub">(name all three)</span></label>
+        <textarea name="q1" placeholder="1. ...   2. ...   3. ..."></textarea>
+      </div>
+      <div class="fg">
+        <label class="fl">Q2 · In the countdown timer, why don't we need "clear screen" before each update?</label>
+        <div class="rg2">
+          <label class="ro"><input type="radio" name="q2" value="a"> Because the timer only runs once and never repeats</label>
+          <label class="ro"><input type="radio" name="q2" value="b"> Because Label Display with the same label number overwrites automatically</label>
+          <label class="ro"><input type="radio" name="q2" value="c"> Because the screen resets itself every second on its own</label>
+          <label class="ro"><input type="radio" name="q2" value="d"> Because we used "print and move to new line" instead</label>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="fl">Q3 · What note number is G (Sol)? And what beat duration = 0.5 seconds?</label>
+        <input type="text" name="q3" placeholder="G = note __ ,   0.5 seconds = __ beat">
+      </div>
+      <div class="fg">
+        <label class="fl">Q4 · Spot a repeating sound pattern in real life. <span class="sub">Find one example — not from class.</span></label>
+        <input type="text" name="q4" placeholder="e.g. a washing machine beep, a car reversing alarm, a doorbell...">
+      </div>
+      <div class="fg">
+        <label class="fl">Q5 · 🌟 Design challenge — if Little M greets visitors at a school event, what would it show on screen AND play as sound?</label>
+        <textarea name="q5" placeholder="Screen shows: ...
+Sound plays: ...
+Because: ..." style="min-height:90px"></textarea>
+      </div>
+      <div class="fdiv"></div>
+      <div class="fg">
+        <label class="fl">How ready do you feel for Lessons 05 &amp; 06?</label>
+        <div class="stars" id="starGroup">
+          <span class="star" data-v="1">★</span><span class="star" data-v="2">★</span>
+          <span class="star" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span>
+        </div>
+        <input type="hidden" name="readiness" id="readinessVal">
+      </div>
+      <div class="fg">
+        <label class="fl">Anything you're wondering about? <span class="sub">(optional)</span></label>
+        <textarea name="question" placeholder="Ask your teacher anything..."></textarea>
+      </div>
+      <button type="submit" class="sbtn">Submit check-in →</button>
+    </form>
+    <div class="succ" id="succState">
+      <div class="chk">✓</div>
+      <h3>Check-in submitted!</h3>
+      <p>Your teacher has your answers. See you in class — bring your laptop charged. 🤖</p>
+    </div>
+  </div>
+</div>
+
+<footer><strong>Robotlab</strong> · infinite possibilities &nbsp;·&nbsp; Pre-class · Lesson 05 &amp; 06 · Screen Display &amp; Unique Sound</footer>
+
+<script>
+// Screen animation
+const lines=['Hello! I\'m Little M!','> Countdown: 10','> Countdown:  9','> Countdown:  8','★ Name | Score','  Xiao |  95  ','  Ming |  88  ','😎 Emoji: Cool'];
+let li=0;const disp=[];const sc=document.getElementById('sc');
+function tick(){if(disp.length>=5)disp.shift();disp.push(lines[li++%lines.length]);sc.innerHTML=disp.map(l=>'<div>'+l+'</div>').join('');setTimeout(tick,900);}tick();
+
+// Tasks
+const KEY='rl_56';const saved=JSON.parse(localStorage.getItem(KEY)||'{}');
+function upProg(){const d=document.querySelectorAll('.task.done').length;const hints=['💡 Screen display · Sound effects · Bring your laptop.','1 down, 3 to go — keep going!','Halfway there! 2 more to go.','Almost done! One last task.','🎉 All done! See you in class.'];document.getElementById('progTxt').textContent=d+' / 4';document.getElementById('progFill').style.width=(d/4*100)+'%';document.getElementById('progHint').textContent=hints[d];}
+document.querySelectorAll('.task').forEach(t=>{const id=t.dataset.id;if(saved[id])t.classList.add('done');t.addEventListener('click',function(e){if(e.target.closest('input,textarea,a,button'))return;if(e.target.closest('.task-top')){this.classList.toggle('done');saved[id]=this.classList.contains('done');localStorage.setItem(KEY,JSON.stringify(saved));upProg();}const o=this.classList.contains('open');document.querySelectorAll('.task').forEach(x=>x.classList.remove('open'));if(!o)this.classList.add('open');});});upProg();
+
+// Stars
+let sv=0;document.querySelectorAll('.star').forEach(s=>{s.addEventListener('mouseenter',()=>{const v=+s.dataset.v;document.querySelectorAll('.star').forEach(x=>x.classList.toggle('on',+x.dataset.v<=v));});s.addEventListener('mouseleave',()=>{document.querySelectorAll('.star').forEach(x=>x.classList.toggle('on',+x.dataset.v<=sv));});s.addEventListener('click',()=>{sv=+s.dataset.v;document.getElementById('readinessVal').value=sv;document.querySelectorAll('.star').forEach(x=>x.classList.toggle('on',+x.dataset.v<=sv));});});
+
+// Radio highlight
+document.querySelectorAll('.ro').forEach(o=>{o.querySelector('input').addEventListener('change',()=>{o.closest('.rg2').querySelectorAll('.ro').forEach(x=>x.classList.remove('chosen'));o.classList.add('chosen');});});
+
+// Submit
+document.getElementById('checkinForm').addEventListener('submit',function(e){e.preventDefault();this.style.display='none';document.getElementById('succState').style.display='block';});
+</script>
+
+
+</body></html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Final Challenge · Lessons 01–06 · Robotlab</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f7f5;--card:#fff;--text:#1a1a1a;--muted:#6b6b6b;--border:#e5e5e2;--blue:#1565C0;--blue-dim:#e8f0fd;--orange:#e8622a;--orange-dim:#fdf0eb;--purple:#7B2D8B;--purple-dim:#f2ebf6;--green:#2d7a3a;--radius:10px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:13px;font-weight:700;color:var(--text);padding:16px 0;margin-right:24px;letter-spacing:-.01em;flex-shrink:0}
+.nav-logo span{display:block;font-size:10px;font-weight:400;color:var(--muted);letter-spacing:.02em}
+.nav-lessons{display:flex;overflow-x:auto}
+.nl{padding:18px 14px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap}
+.nl.active{color:var(--purple);border-bottom-color:var(--purple);font-weight:600}
+.nbadge{display:inline-block;background:var(--purple);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;vertical-align:middle}
+.hero{max-width:760px;margin:0 auto;padding:64px 24px 48px}
+.hero-label{font-size:11px;font-weight:600;color:var(--purple);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-.03em;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--purple)}
+.hero-desc{font-size:15px;color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:32px}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.hmi{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.hmi strong{color:var(--text);font-weight:600}
+.hmd{width:4px;height:4px;background:var(--border);border-radius:50%}
+.sec{max-width:760px;margin:0 auto;padding:0 24px 64px}
+.sec-hdr{display:flex;align-items:baseline;gap:16px;margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.sec-num{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.sec-title{font-size:1.25rem;font-weight:700;letter-spacing:-.02em}
+.sec-time{font-size:11px;color:var(--muted);margin-left:auto;flex-shrink:0}
+.recap-intro{font-size:13px;color:var(--muted);margin-bottom:20px}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.rg,.pg,.form-row,.stagegrid{grid-template-columns:1fr}}
+.rc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.rc-icon{font-size:20px;margin-bottom:10px}
+.rc h3{font-size:13px;font-weight:700;margin-bottom:6px}
+.rc p{font-size:13px;color:var(--muted);line-height:1.6}
+.rc code{font-size:12px;background:#f0f0ee;padding:1px 5px;border-radius:4px;font-family:monospace;color:var(--text)}
+
+/* STAGE PREVIEW STRIP */
+.stage-strip{display:flex;align-items:center;gap:6px;margin-bottom:24px;flex-wrap:wrap}
+.stage-pill{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:8px 16px 8px 10px;font-size:12px;font-weight:600;color:var(--text)}
+.stage-pill .num{width:22px;height:22px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.stage-arrow{color:var(--border);font-size:14px;flex-shrink:0}
+
+.prev-intro{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.7}
+.track-demo{width:100%;height:130px;background:#111827;border-radius:8px;position:relative;overflow:hidden;margin-bottom:8px}
+.track-path{position:absolute;top:50%;left:8%;width:84%;height:4px;background:#374151;border-radius:2px;transform:translateY(-50%)}
+.track-path::before{content:'';position:absolute;left:0;top:-3px;width:10px;height:10px;border-radius:50%;background:#4ade80}
+.track-path::after{content:'';position:absolute;right:0;top:-7px;width:18px;height:18px;border:2px dashed #f59e0b;border-radius:4px}
+.car{position:absolute;top:50%;width:16px;height:10px;background:#67e8f9;border-radius:3px;transform:translateY(-50%);animation:driveAlong 3s ease-in-out infinite;box-shadow:0 0 8px #67e8f9}
+@keyframes driveAlong{
+  0%{left:8%}
+  60%{left:78%}
+  75%{left:82%;background:#f59e0b}
+  100%{left:78%;background:#4ade80}
+}
+.music-demo{width:100%;height:90px;background:#0f1f0f;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:5px;padding:10px}
+.nb{width:7px;border-radius:4px;background:#4ade80;animation:sw 1.2s ease-in-out infinite}
+.nb:nth-child(1){height:18px;animation-delay:0s}.nb:nth-child(2){height:32px;animation-delay:.1s}
+.nb:nth-child(3){height:55px;animation-delay:.2s}.nb:nth-child(4){height:38px;animation-delay:.3s}
+.nb:nth-child(5){height:65px;animation-delay:.15s}.nb:nth-child(6){height:42px;animation-delay:.25s}
+.nb:nth-child(7){height:28px;animation-delay:.05s}.nb:nth-child(8){height:48px;animation-delay:.35s}
+.nb:nth-child(9){height:22px;animation-delay:.1s}
+@keyframes sw{0%,100%{transform:scaleY(.25);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;overflow:hidden}
+.pc-sub{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.pc-sub span{color:var(--purple)}
+.pc h3{font-size:15px;font-weight:700;margin-bottom:4px}
+.pc p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.pnote{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;display:flex;align-items:flex-start;gap:10px}
+.pnarr{color:var(--purple);font-weight:700;flex-shrink:0}
+
+.task-intro{font-size:14px;color:var(--muted);margin-bottom:10px;line-height:1.7}
+.task-hint{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:24px;display:flex;align-items:flex-start;gap:10px}
+.tasks{display:flex;flex-direction:column;gap:2px}
+.task{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color .15s}
+.task:hover{border-color:#ccc}
+.task.done{background:#f9fdf9;border-color:#c3dfc7}
+.task-top{padding:18px 20px;display:flex;align-items:flex-start;gap:14px}
+.task-chk{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:.2s;background:#fff}
+.task.done .task-chk{background:var(--green);border-color:var(--green)}
+.task-chk svg{opacity:0;transition:.15s;width:12px;height:12px}
+.task.done .task-chk svg{opacity:1}
+.tnl{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.tbody h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.tbody p{font-size:13px;color:var(--muted);line-height:1.6}
+.task-exp{padding:0 20px 20px 56px;display:none}
+.task.open .task-exp{display:block}
+.task-exp-inner{border-top:1px solid var(--border);padding-top:16px}
+.td{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.tlist{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tlist li{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.sl{color:var(--border);font-weight:700;flex-shrink:0;margin-top:1px}
+.tlist li strong{color:var(--text)}
+.tlist li code{font-size:12px;background:#f0f0ee;padding:1px 4px;border-radius:3px;font-family:monospace;color:var(--text)}
+.thinq{background:#faf3fb;border-left:3px solid var(--purple);border-radius:0 6px 6px 0;padding:12px 14px;margin-top:14px;font-size:13px;color:var(--muted);line-height:1.6}
+.thinq strong{color:var(--purple);display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;font-weight:700}
+.score-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f9f9f7;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:13px}
+.score-row .lbl{color:var(--text);font-weight:600}
+.score-stars{display:flex;gap:3px}
+.score-stars .s{font-size:16px;color:var(--border)}
+.score-stars .s.fill{color:#f59e0b}
+
+.prog-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:20px}
+.prog-lbl{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between}
+.prog-lbl span{color:var(--muted);font-weight:400}
+.prog-trk{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--purple);border-radius:3px;transition:.4s;width:0%}
+.prog-hint{font-size:12px;color:var(--muted);margin-top:10px}
+
+.form-section-wrap{margin-top:0}
+.form-locked{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:48px 32px;text-align:center}
+.lock-icon{font-size:2.5rem;margin-bottom:16px;opacity:.35}
+.lock-title{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+.lock-desc{font-size:13px;color:var(--muted);line-height:1.6;max-width:380px;margin:0 auto}
+.lock-progress{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px}
+.lock-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:.3s}
+.lock-dot.done{background:var(--purple)}
+.form-unlocked{display:none}
+.form-unlocked-header{background:var(--card);border:1px solid var(--border);border-top-left-radius:var(--radius);border-top-right-radius:var(--radius);padding:20px 24px;border-bottom:none}
+.form-unlocked-header h3{font-size:1rem;font-weight:700;margin-bottom:4px}
+.form-unlocked-header p{font-size:13px;color:var(--muted)}
+.unlock-badge{display:inline-flex;align-items:center;gap:6px;background:#faf3fb;color:var(--purple);font-size:11px;font-weight:700;padding:4px 10px;border-radius:50px;margin-bottom:12px;letter-spacing:.03em}
+.gform-iframe{width:100%;height:900px;border:1px solid var(--border);border-top:none;border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);display:block;background:#fff}
+@keyframes unlockPop{0%{transform:scale(.95);opacity:0}100%{transform:scale(1);opacity:1}}
+.form-unlocked.show{display:block;animation:unlockPop .35s ease}
+
+footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:12px;color:var(--muted)}
+footer strong{color:var(--text)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Robotlab<span>infinite possibilities</span></div>
+  <div class="nav-lessons">
+    <a class="nl" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-01-mission_1.html">LESSON 01</a>
+    <a class="nl" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-02-mission_2.html">LESSON 02</a>
+    <a class="nl" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-03-mission_3.html">LESSON 03</a>
+    <a class="nl" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-04-mission_4.html">LESSON 04</a>
+    <a class="nl" href="https://robotlaboffice.github.io/robotlab-pre-class-mission/lesson-56-mission.html">LESSON 05·06</a>
+    <a class="nl active" href="#">FINAL CHALLENGE <span class="nbadge">ACTIVE</span></a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Final Challenge · Lessons 01–06</div>
+  <h1>One last run.<br/>Line, park, light up,<br/>and <em>play your song</em>.</h1>
+  <p class="hero-desc">This is it — the final class! Instead of a written test, you'll bring everything from the whole course into one robot performance. mBot2 follows a line, parks itself between two markers, and runs a light show — then Little M takes over the mic and plays your favourite song. Quick prep below before we run it for real.</p>
+  <div class="hero-meta">
+    <div class="hmi">⏱ <strong>No time limit</strong></div>
+    <div class="hmd"></div>
+    <div class="hmi">🤖 <strong>mBot2 + Little M</strong></div>
+    <div class="hmd"></div>
+    <div class="hmi">👥 <strong>Groups of 2–3</strong></div>
+  </div>
+</div>
+
+<!-- 01 RECAP -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">01</span>
+    <span class="sec-title">Quick Recap · Everything so far</span>
+    <span class="sec-time">3 min</span>
+  </div>
+  <div class="recap-intro">Six lessons, four skills. Do you remember how they all fit together?</div>
+  <div class="rg">
+    <div class="rc"><div class="rc-icon">🎨</div><h3>RGB &amp; Light Effects</h3><p>Red, Green, Blue 0–255 mixed together. Breathing lamps fade in and out; gradients shift smoothly from one colour to another.</p></div>
+    <div class="rc"><div class="rc-icon">🛣️</div><h3>Line Following</h3><p>mBot2's bottom sensors detect the line and steer to stay on it — the same logic from our sensor lessons.</p></div>
+    <div class="rc"><div class="rc-icon">🖥️</div><h3>Screen Display</h3><p>Label Display pins text to a position and overwrites in place — perfect for a clean message on Little M's screen.</p></div>
+    <div class="rc"><div class="rc-icon">🎵</div><h3>Sound &amp; Music</h3><p>C D E F G A B = notes 60–71. Beat controls duration. String them together and you've got a song.</p></div>
+  </div>
+</div>
+
+<!-- 02 PREVIEW -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">02</span>
+    <span class="sec-title">Preview · The 4-stage run</span>
+    <span class="sec-time">2 min</span>
+  </div>
+  <p class="prev-intro">Here's the full sequence your robots will perform, start to finish. Watch the demo below — same idea, your own version.</p>
+
+  <div class="stage-strip">
+    <div class="stage-pill"><span class="num">1</span> Line Following</div>
+    <span class="stage-arrow">→</span>
+    <div class="stage-pill"><span class="num">2</span> Parallel Parking</div>
+    <span class="stage-arrow">→</span>
+    <div class="stage-pill"><span class="num">3</span> Light Show</div>
+    <span class="stage-arrow">→</span>
+    <div class="stage-pill"><span class="num">4</span> Music Finale</div>
+  </div>
+
+  <div class="pg">
+    <div class="pc">
+      <div class="pc-sub"><span>Stages 1–3</span> · mBot2</div>
+      <h3>Drive · Park · Light Up</h3>
+      <p>Follow the line to the end, reverse-park between two markers, then run a 2-colour LED effect once parked.</p>
+      <div class="track-demo">
+        <div class="track-path"></div>
+        <div class="car"></div>
+      </div>
+    </div>
+    <div class="pc">
+      <div class="pc-sub"><span>Stage 4</span> · Little M</div>
+      <h3>Screen Message + Song</h3>
+      <p>Show a short message on screen, then play your favourite song using piano notes — at least 8 notes long.</p>
+      <div class="music-demo">
+        <div class="nb"></div><div class="nb"></div><div class="nb"></div>
+        <div class="nb"></div><div class="nb"></div><div class="nb"></div>
+        <div class="nb"></div><div class="nb"></div><div class="nb"></div>
+      </div>
+    </div>
+  </div>
+  <div class="pnote"><span class="pnarr">→</span><span>Don't worry about coding it all in one go. Build each stage separately first, test it, then chain them together. It'll click when you run it for real.</span></div>
+</div>
+
+<!-- 03 TASKS / SCORING PREP -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">03</span>
+    <span class="sec-title">Before you run it · Tick when ready</span>
+    <span class="sec-time">10 min</span>
+  </div>
+  <p class="task-intro">Run through these checks with your group before calling your teacher over for the final run. Tap a task to tick it off — it saves automatically.</p>
+  <div class="task-hint"><span>👆</span><span>Click anywhere on a task row to mark it done. Tick all 4 to unlock the group check-in form below.</span></div>
+
+  <div class="tasks" id="taskList">
+
+    <div class="task" data-id="t1">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"/></svg></div>
+        <div class="tbody">
+          <div class="tnl">Stage 1</div>
+          <h4>Line following works end to end</h4>
+          <p>mBot2 follows the taped line from start to finish without losing it, drifting off, or getting stuck.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <p class="td">Checklist before you call this done:</p>
+        <ul class="tlist">
+          <li><span class="sl">/</span><span>Robot starts on the line and follows it the <strong>whole way</strong> without manual correction.</span></li>
+          <li><span class="sl">/</span><span>Movement is smooth, not jerky or zig-zagging hard.</span></li>
+          <li><span class="sl">/</span><span>It reaches the end of the line and is ready to begin parking.</span></li>
+        </ul>
+        <div class="score-row"><span class="lbl">Scored out of 5</span><div class="score-stars"><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span></div></div>
+      </div></div>
+    </div>
+
+    <div class="task" data-id="t2">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"/></svg></div>
+        <div class="tbody">
+          <div class="tnl">Stage 2</div>
+          <h4>Parallel parking lands inside the markers</h4>
+          <p>At the end of the line, mBot2 reverses and parks fully between two markers — no crashing, no overshoot.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <p class="td">Set up two markers (boxes, books, anything) with a gap roughly 1.5× the width of mBot2. Checklist:</p>
+        <ul class="tlist">
+          <li><span class="sl">/</span><span>Robot reverses in a controlled way — not a blind straight backup.</span></li>
+          <li><span class="sl">/</span><span>Final position is <strong>fully inside</strong> the two markers, not touching either one.</span></li>
+          <li><span class="sl">/</span><span>It comes to a clean stop — doesn't keep rolling or bouncing off a marker.</span></li>
+        </ul>
+        <div class="thinq"><strong>Think about it</strong>How will the robot know it's reversed far enough? What sensor or timing trick from earlier lessons could help here?</div>
+        <div class="score-row"><span class="lbl">Scored out of 5</span><div class="score-stars"><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span></div></div>
+      </div></div>
+    </div>
+
+    <div class="task" data-id="t3">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"/></svg></div>
+        <div class="tbody">
+          <div class="tnl">Stage 3</div>
+          <h4>Light show runs after parking</h4>
+          <p>Once parked, mBot2 plays a short LED sequence using at least 2 colours and 1 effect from earlier lessons.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <p class="td">Pick at least one effect type — mix and match if you want to go further:</p>
+        <ul class="tlist">
+          <li><span class="sl">/</span><span><strong>Breathing</strong> — brightness variable counts 0 → 255 → 0 on a chosen colour.</span></li>
+          <li><span class="sl">/</span><span><strong>Gradient</strong> — one colour value rises while another falls (e.g. Red → Yellow → Green).</span></li>
+          <li><span class="sl">/</span><span><strong>Flashing</strong> — alternates between 2+ colours on a timed loop.</span></li>
+        </ul>
+        <div class="thinq"><strong>Reminder</strong>R255 G255 B0 = Yellow · R0 G255 B255 = Cyan · R255 G0 B255 = Magenta. Mix your own from the full RGB table if you want something different.</div>
+        <div class="score-row"><span class="lbl">Scored out of 5</span><div class="score-stars"><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span></div></div>
+      </div></div>
+    </div>
+
+    <div class="task" data-id="t4">
+      <div class="task-top">
+        <div class="task-chk"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5,6 4.5,9 10.5,3"/></svg></div>
+        <div class="tbody">
+          <div class="tnl">Stage 4</div>
+          <h4>Music finale on Little M</h4>
+          <p>Switch to Little M: show a short message on screen, then play your favourite song — at least 8 notes.</p>
+        </div>
+      </div>
+      <div class="task-exp"><div class="task-exp-inner">
+        <p class="td">Checklist for the finale:</p>
+        <ul class="tlist">
+          <li><span class="sl">/</span><span>Screen shows something readable — your group name, "The End!", or similar — using Label Display.</span></li>
+          <li><span class="sl">/</span><span>Song uses <strong>8 or more notes</strong> from the piano block (C=60 … B=71, any octave).</span></li>
+          <li><span class="sl">/</span><span>Tune is recognisable — even a simple melody like Do Re Mi or a song's opening line counts.</span></li>
+          <li><span class="sl">/</span><span><strong>Bonus:</strong> add a matching LED colour or screen animation while the music plays.</span></li>
+        </ul>
+        <div class="thinq"><strong>Tip</strong>Hum your song slowly and try to match each note to Do/Re/Mi/Fa/Sol/La/Ti — that's the fastest way to find the right note numbers.</div>
+        <div class="score-row"><span class="lbl">Scored out of 5</span><div class="score-stars"><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span><span class="s fill">★</span></div></div>
+      </div></div>
+    </div>
+
+  </div><!-- end tasks -->
+
+  <div class="prog-wrap">
+    <div class="prog-lbl">Final Challenge progress <span id="progTxt">0 / 4</span></div>
+    <div class="prog-trk"><div class="prog-fill" id="progFill"></div></div>
+    <div class="prog-hint" id="progHint">💡 Tick all 4 stages to unlock the group check-in form below.</div>
+  </div>
+</div>
+
+<!-- 04 CHECK-IN -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-num">04</span>
+    <span class="sec-title">Check-in · Submit after your run</span>
+    <span class="sec-time">2 min</span>
+  </div>
+
+  <div class="form-section-wrap">
+
+    <div class="form-locked" id="formLocked">
+      <div class="lock-icon">🔒</div>
+      <div class="lock-title">Complete all 4 stages to unlock</div>
+      <div class="lock-desc">Tick off all four stages above once your group has run them, and this check-in form will open automatically.</div>
+      <div class="lock-progress" id="lockDots">
+        <div class="lock-dot" id="ld1"></div>
+        <div class="lock-dot" id="ld2"></div>
+        <div class="lock-dot" id="ld3"></div>
+        <div class="lock-dot" id="ld4"></div>
+      </div>
+    </div>
+
+    <div class="form-unlocked" id="formUnlocked">
+      <div class="form-unlocked-header">
+        <div class="unlock-badge">✓ &nbsp;All stages complete</div>
+        <h3>Final Challenge check-in form</h3>
+        <p>Fill in the form below as a group — your answers go straight to the class spreadsheet.</p>
+      </div>
+      <iframe
+        class="gform-iframe"
+        id="gformIframe"
+        src=""
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="Final Challenge Check-in Form">
+        Loading…
+      </iframe>
+    </div>
+
+  </div>
+</div>
+
+<footer><strong>Robotlab</strong> · infinite possibilities &nbsp;·&nbsp; Final Challenge · Lessons 01–06 · Last class of the course</footer>
+
+<script>
+// ── GOOGLE FORM URL ──
+// Replace with your own Final Challenge form, or reuse the same one
+const GFORM_URL = 'https://docs.google.com/forms/d/13Y_nnoYCl2VwKzvPG1MD5Tx2lFVkiTAqAJ6IBF6hs34/viewform?embedded=true';
+
+// ── TASKS ──
+const KEY='rl_final';
+const saved=JSON.parse(localStorage.getItem(KEY)||'{}');
+
+function countDone(){return document.querySelectorAll('.task.done').length;}
+
+function updateLockDots(done){
+  for(let i=1;i<=4;i++){
+    document.getElementById('ld'+i).classList.toggle('done', i<=done);
+  }
+}
+
+function checkUnlock(){
+  const done=countDone();
+  const hints=[
+    '💡 Tick all 4 stages to unlock the group check-in form below.',
+    '1 down, 3 to go — keep running!',
+    'Halfway there! 2 more stages to go.',
+    'Almost done! One last stage.',
+    '🎉 All done! Check-in form is now open below. ↓'
+  ];
+  document.getElementById('progTxt').textContent=done+' / 4';
+  document.getElementById('progFill').style.width=(done/4*100)+'%';
+  document.getElementById('progHint').textContent=hints[done];
+  updateLockDots(done);
+
+  if(done===4){
+    document.getElementById('formLocked').style.display='none';
+    document.getElementById('gformIframe').src=GFORM_URL;
+    document.getElementById('formUnlocked').classList.add('show');
+    setTimeout(()=>{ document.getElementById('formUnlocked').scrollIntoView({behavior:'smooth',block:'start'}); }, 400);
+  } else {
+    document.getElementById('formLocked').style.display='block';
+    document.getElementById('formUnlocked').classList.remove('show');
+    document.getElementById('gformIframe').src='';
+  }
+}
+
+document.querySelectorAll('.task').forEach(t=>{
+  const id=t.dataset.id;
+  if(saved[id]) t.classList.add('done');
+
+  t.addEventListener('click',function(e){
+    if(e.target.closest('input,textarea,a,button')) return;
+    if(e.target.closest('.task-top')){
+      this.classList.toggle('done');
+      saved[id]=this.classList.contains('done');
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      checkUnlock();
+    }
+    const isOpen=this.classList.contains('open');
+    document.querySelectorAll('.task').forEach(x=>x.classList.remove('open'));
+    if(!isOpen) this.classList.add('open');
+  });
+});
+
+checkUnlock();
+</script>
+</body>
+</html>
